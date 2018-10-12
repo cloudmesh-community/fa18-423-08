@@ -4,18 +4,15 @@ owner:
   lastname: "Zhao"
   hid: "fa18-423-08"
   community: "i423"
-
-Technologies:
+technologies:
   - url: https://github.com/cloudmesh/technologies/blob/master/chapters/tech/apache-arrow.md
   - url: https://github.com/cloudmesh/technologies/blob/master/chapters/tech/thrift.md
-
-Paper:
-  title: tbd
-  url: tbd
-  group: fa18-423-08
-
-Project:
-  title: tbd
-  url: tbd
-  group: fa18-423-08
-  code: tbd
+paper:
+  - title: tbd
+    url: tbd
+    group: fa18-423-08
+project:
+  - title: tbd
+    url: tbd
+    group: fa18-423-08
+    code: tbd
