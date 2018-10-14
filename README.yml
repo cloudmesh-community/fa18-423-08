@@ -4,15 +4,17 @@ owner:
   lastname: "Zhao"
   hid: "fa18-423-08"
   community: "i423"
+  semester: fa18
 technologies:
   - url: https://github.com/cloudmesh/technologies/blob/master/chapters/tech/apache-arrow.md
   - url: https://github.com/cloudmesh/technologies/blob/master/chapters/tech/thrift.md
 paper:
-  - title: tbd
+  - title: N/A
     url: tbd
     group: fa18-423-08
 project:
-  - title: tbd
+  - title: Secchi Disk Video Analytics
+    keyword: Secchi
     url: tbd
     group: fa18-423-08
     code: tbd
