@@ -1,4 +1,4 @@
-# Title: Big Data Analytics in Computer Vision
+# Title: Big Data Analytics in Computer Vision :hand: fa18-423-08
 
 Yuli Zhao
 Indiana University
