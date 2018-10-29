@@ -6,6 +6,10 @@
 
 :o: could we use master worker and not master slave
 
+:o: stream of data is not shown in design
+
+:o: arhitectur how to connect boat to cluster not shown 
+
 Yuli Zhao <br/>
 Indiana University<br/>
 Bloomington, Indiana<br/>
