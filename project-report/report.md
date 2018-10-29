@@ -1,5 +1,7 @@
 # Secchi Disk Visibility Recognition
 
+:o: use the sample and do not make it beautifu;, the sample will do formating correct
+
 Yuli Zhao <br/>
 Indiana University<br/>
 Bloomington, Indiana<br/>
