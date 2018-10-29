@@ -4,6 +4,8 @@
 
 :o: integrate refermnces
 
+:o: could we use master worker and not master slave
+
 Yuli Zhao <br/>
 Indiana University<br/>
 Bloomington, Indiana<br/>
