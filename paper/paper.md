@@ -5,6 +5,10 @@ Indiana University
 Bloomington, Indiana
 yulizhao@iu.edu
 
+:o: format incorrect
+
+| github: [:cloud:](https://github.com/cloudmesh-community/fa18-423-08/edit/master/paper/paper.md)
+
 ## Abstract
 
 Computer vision is designed to imitate human vision. In order to
