@@ -33,7 +33,7 @@ Instead of having researcher record every measurement, a camera can be placed by
 
 One of the purposes of this project is to create a continuous data flow from the raw video input, to the output of whether if the secchi disk is visible and the measurements of the tape. To maximize efficiency, multiple machines are needed to implement a master/slave architecture. One machine will be the master, the rest of the machines are slaves. The master machine retrieves raw video data and assigns the data to one of the slave machines. Each slave machine is programmed to break down the video into frames and perform analysis on each frame, then return two lists of results with secchi disk visibility and the measurements of the tape. When a slave machine is done with one analysis, it will tell the master machine that it is available, and the master machine will assign another raw video to the slave machine. This cycle will repeat to maximize the efficiency of analyzing the big data.
 
-use proper mark down image
+:o: use proper mark down image
 
 ```
 <img width="866" alt="screen shot 2018-10-28 at 9 30 32 pm" src="https://user-images.githubusercontent.com/43068990/47626088-b00da500-daff-11e8-9c4c-50a47da08207.png">
