@@ -1,5 +1,7 @@
 # Secchi Disk Visibility Recognition
 
+:o: format not followed
+
 :o: use the sample and do not make it beautifu;, the sample will do formating correct
 
 :o: integrate refermnces
@@ -10,10 +12,13 @@
 
 :o: arhitectur how to connect boat to cluster not shown 
 
-Yuli Zhao <br/>
-Indiana University<br/>
-Bloomington, Indiana<br/>
-yulizhao@iu.edu<br/>
+Yuli Zhao
+Indiana University
+Bloomington, Indiana
+yulizhao@iu.edu
+\
+
+| github: [:cloud:](https://github.com/cloudmesh-community/fa18-523-81/blob/master/project-report/report.md)
 
 ## Abstract
 
@@ -28,7 +33,11 @@ Instead of having researcher record every measurement, a camera can be placed by
 
 One of the purposes of this project is to create a continuous data flow from the raw video input, to the output of whether if the secchi disk is visible and the measurements of the tape. To maximize efficiency, multiple machines are needed to implement a master/slave architecture. One machine will be the master, the rest of the machines are slaves. The master machine retrieves raw video data and assigns the data to one of the slave machines. Each slave machine is programmed to break down the video into frames and perform analysis on each frame, then return two lists of results with secchi disk visibility and the measurements of the tape. When a slave machine is done with one analysis, it will tell the master machine that it is available, and the master machine will assign another raw video to the slave machine. This cycle will repeat to maximize the efficiency of analyzing the big data.
 
+use proper mark down image
+
+```
 <img width="866" alt="screen shot 2018-10-28 at 9 30 32 pm" src="https://user-images.githubusercontent.com/43068990/47626088-b00da500-daff-11e8-9c4c-50a47da08207.png">
+```
 
 ## Slave Machine
 
@@ -36,4 +45,8 @@ The first step slave machine needs to do is to take apart the raw video into sep
 
 :o: use real table an d not image
 
+images must be in images subdir
+
+```
 <img width="444" alt="screen shot 2018-10-28 at 10 21 55 pm" src="https://user-images.githubusercontent.com/43068990/47626128-efd48c80-daff-11e8-9ae1-36a69a84b59a.png">
+```
