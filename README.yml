@@ -8,10 +8,6 @@ owner:
 technologies:
   - url: https://github.com/cloudmesh/technologies/blob/master/chapters/tech/apache-arrow.md
   - url: https://github.com/cloudmesh/technologies/blob/master/chapters/tech/thrift.md
-paper:
-  - title: N/A
-    url: tbd
-    group: fa18-423-08
 project:
   - title: Secchi Disk Video Analytics
     keyword: Secchi
