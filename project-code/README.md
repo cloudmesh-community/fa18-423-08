@@ -9,6 +9,14 @@ git clone https://github.com/cloudmesh-community/fa18-423-08.git
 cd fa18-423-08/project-code
 ```
 
+### INstall CV2
+
+On OSX
+
+```bash
+brew brew tap homebrew/science
+```
+
 ## Fetching the data
 
 The Secchi Disk Data is located at 
