@@ -1,4 +1,5 @@
 import cv2
+import sys
 
 def video_frame(video_name):
     cap = cv2.VideoCapture(video_name)
@@ -15,4 +16,6 @@ def video_frame(video_name):
     cap.release()
 
 # main
-video_frame("DSCN0003.AVI")
+if __name__== "__main__":
+    filename = sys.argv[1]
+    video_frame(filename)
