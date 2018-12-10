@@ -6,7 +6,7 @@ First install teh code with
 
 ```bash
 git clone https://github.com/cloudmesh-community/fa18-423-08.git
-cd fa18-423-08/	project-code
+cd fa18-423-08/project-code
 ```
 
 ## Fetching the data
