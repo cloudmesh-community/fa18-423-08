@@ -2,6 +2,7 @@
 
 import cv2
 import sys
+import os
 
 def video_frame(video_name):
     cap = cv2.VideoCapture(video_name)
@@ -11,7 +12,7 @@ def video_frame(video_name):
     while capture:
         capture,image = cap.read()
         cv2.imwrite('images/frame%d.jpg' % count, image)
-        print("Creating frame: ", capture)
+        print("Creating frame: ", count, capture)
         count += 1
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
