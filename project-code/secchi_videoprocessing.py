@@ -8,7 +8,7 @@ def video_frame(video_name):
     capture = True
     while capture:
         capture,image = cap.read()
-        cv2.imwrite('frame%d.jpg' % count, image)
+        cv2.imwrite('images/frame%d.jpg' % count, image)
         print("Creating frame: ", capture)
         count += 1
         if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -18,4 +18,5 @@ def video_frame(video_name):
 # main
 if __name__== "__main__":
     filename = sys.argv[1]
+    os.system("mkdir images")
     video_frame(filename)
