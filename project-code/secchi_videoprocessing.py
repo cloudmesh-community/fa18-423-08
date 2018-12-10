@@ -13,3 +13,6 @@ def video_frame(video_name):
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
     cap.release()
+
+# main
+video_frame("DSCN0003.AVI")
