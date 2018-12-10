@@ -10,7 +10,18 @@ cd fa18-423-08/project-code
 ```
 
 ## Fetching the data
+
+The Secchi Disk Data is located at 
+
 https://drive.google.com/drive/folders/1W0EwjAcmZKgC-qEUosWNuUNwP4lOZ8fr
+
+We have chose from that data the following video
+
+
+
+Please download it with 
+
+
 ## Execution of the code
 
 
