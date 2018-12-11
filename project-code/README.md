@@ -174,3 +174,7 @@ if __name__== "__main__":
         data = secchi_segment(frame)
         print(frame)
 ```
+
+An example would look like:
+
+![Original](frame_secchi_frame0332.jpg)
