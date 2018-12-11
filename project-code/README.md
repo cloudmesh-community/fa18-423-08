@@ -9,12 +9,16 @@ git clone https://github.com/cloudmesh-community/fa18-423-08.git
 cd fa18-423-08/project-code
 ```
 
-### INstall CV2
+### Install CV2
 
 On OSX
 
 ```bash
 brew brew tap homebrew/science
+```
+### Install Progressbar
+```bash
+pip install progressbar
 ```
 
 ## Fetching the data
