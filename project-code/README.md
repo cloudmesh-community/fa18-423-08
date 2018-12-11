@@ -129,3 +129,6 @@ if __name__== "__main__":
     t.join()
     print("Done!")
 ```
+
+An example frame would look like this:
+
