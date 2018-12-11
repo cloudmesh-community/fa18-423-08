@@ -1,4 +1,4 @@
-# Secchi Disk Visibility Recognition
+# Secchi Disk Visibility Recognition, :wave: fa18-423-08
 
 :o: format not followed
 
@@ -19,6 +19,10 @@ yulizhao@iu.edu
 \
 
 | github: [:cloud:](https://github.com/cloudmesh-community/fa18-423-08/blob/master/project-report/report.md)
+
+:o: This student focusses at this time on developing programs. the results need to be clearly documented. He has not shown yet the effort he spend.
+
+:o: A simple program to use filters to filter for the measuing tape is missing. 
 
 ## Abstract
 
