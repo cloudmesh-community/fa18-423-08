@@ -181,6 +181,12 @@ if __name__== "__main__":
 
 2. Extract secchi segment from the frames
 
+3. Label the visibility of each frame in filenames
+
+4. Reshape the images and put all images into a CSV file
+
+5. CNN training
+
 
 ### 1. Seperate video into frames
 
@@ -275,7 +281,7 @@ An example frame would look like this:
 ![Original](frame527.jpg)
 
 
-Second step is to extract the secchi disk from the frames.
+### 2. extract the secchi disk from the frames.
 
 The secchi disk is taken out of the frame by the pixel position of 290 < x < 690
 
@@ -323,6 +329,134 @@ if __name__== "__main__":
         print(frame)
 ```
 
-An example would look like:
+### 3. label the visibility of each frame in filenames
 
-![Original](frame_secchi_frame0332.jpg)
+This step has to be done by the researcher, to identify to which frame is the secchi disk
+
+no longer visible. Add a "_1" behind the filename if the frame still has secchi disk,
+
+add a "_0" behind the filename if the frame does not have secchi disk.
+
+
+```python
+import os
+
+files = os.listdir('DSCN0003')
+
+count = 0
+for file in files[0:701]:
+    new_file = os.path.splitext(file)[0]+'_1'+".jpg"
+    os.rename(os.path.join('DSCN0003',file),os.path.join('DSCN0003',new_file))
+    
+
+for file in files[701:1466]:
+    new_file = os.path.splitext(file)[0]+'_0'+".jpg"
+    os.rename(os.path.join('DSCN0003',file),os.path.join('DSCN0003',new_file))
+
+for file in files[1466:]:
+    new_file = os.path.splitext(file)[0]+'_1'+".jpg"
+    os.rename(os.path.join('DSCN0003',file),os.path.join('DSCN0003',new_file))
+```
+
+### 4. Reshape the images and put all images into a CSV file
+
+Reshape each image into one array, and then add the label value to the "label" column
+
+Then add each array into a pandas DataFrame, then save the dataframe as a csv file.
+
+```python
+import os
+import cv2
+import pandas as pd
+import time
+
+
+start = time.time()
+
+folder_name = 'DSCN0003'
+
+data_X = pd.DataFrame()
+y_list = []
+for _,_,files in os.walk(folder_name):
+    i = 0
+    for file in files:
+        filepath = os.path.join(folder_name, file)
+        
+        try:
+            im = cv2.imread(filepath)
+            im = pd.DataFrame(im[:,:,0].reshape(1,-1))
+            data_X = pd.concat([data_X, im], axis=0)
+            y = os.path.splitext(file)[0].split('_')[-1]
+            y_list.append(y)
+            print("Pic %i" % i)
+            i += 1
+        
+        except:
+            continue
+
+runtime = time.time() - start
+print("Runtime is %f s." % runtime)
+
+data = data_X.copy()
+data['label'] = y_list
+data.to_csv('DSCN0003.csv',index = False)
+```
+
+### 5. CNN training
+
+Read the csv file
+
+have a training set and a testing set
+
+seperate the label column and store it into a seperate variable
+
+One-hot encoding process the label values.
+
+The neural network structure is already designed
+
+model at last will be saved as a "h5" file.
+
+
+```python
+import numpy as np
+import pandas as pd
+from keras.models import *
+from keras.layers import *
+from keras.utils import np_utils
+
+train_size = 1600
+img_cols, img_rows = 50, 90
+n_class = 2
+
+data = pd.read_csv('DSCN0003.csv')
+data_y = np_utils.to_categorical(data['label'],2)
+data_X = np.array(data.iloc[:,:(data.shape[1]-1)])
+
+train_X = data_X[:train_size,:]
+train_X = train_X.reshape(train_X.shape[0], img_rows, img_cols, 1)
+test_X = data_X[train_size:,:]
+test_X = test_X.reshape(test_X.shape[0], img_rows, img_cols, 1)
+train_y = data_y[:train_size,:]
+test_y = data_y[train_size:,:]
+
+inputs = Input((img_rows, img_cols, 1))
+x = inputs
+
+for i in range(3):
+    x = Convolution2D(8*2**i, (3,3), activation='relu')(x)
+    x = Convolution2D(8*2**i, (3,3), activation='relu')(x)
+    x = BatchNormalization()(x)
+    x = MaxPooling2D((2,2))(x)
+
+x = Flatten()(x)
+x = Dropout(0.05)(x)
+x = Dense(n_class, activation='softmax')(x)
+
+model = Model(inputs=inputs, outputs=x)
+model.summary()
+
+model.compile(optimizer='Adam',loss='categorical_crossentropy',metrics=['accuracy'])
+model.fit(train_X, train_y, epochs=5, batch_size=128, validation_data=(test_X,test_y))
+
+model.save('secchi_classification.h5')
+```
