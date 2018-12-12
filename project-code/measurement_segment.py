@@ -10,7 +10,7 @@ import cv2
 import glob
 
 x0,x1,y0,y1 = 1280, 640, 180, 400
-delta_x = -1
+delta_x = -5
 
 def image_segments(image):
     img = cv2.imread(image)
@@ -27,9 +27,7 @@ def image_segments(image):
                     count = count + 1
         if count/(160*220) > 0.2:
             flag = True
-            axis = x
             break
-    mini_secchi = img[:,axis-400:axis-90,:]
 
 
 
