@@ -15,7 +15,9 @@ def secchi_segment(frame):
     frame_number = frame.split('\\')[2].split('.')[0]
     if not os.path.exists(video_name):
         os.makedirs(video_name)
-    secchi = img[:,300:680,:]
+    secchi = img[:,290:690,:]
+    secchi = cv2.cvtColor(secchi, cv2.COLOR_BGR2GRAY)
+    secchi = cv2.resize(secchi,(90,50),interpolation = cv2.INTER_CUBIC)
     path = video_name + '/frame_secchi_{number}.jpg'.format(number = frame_number)
     cv2.imwrite(path,secchi)
 #main
