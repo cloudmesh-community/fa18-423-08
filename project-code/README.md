@@ -85,6 +85,28 @@ python secchi_full_process1212.py DSCN0003.avi
 
 where the file takes one argument for the video name
 
+The frame_catch function first read each frame in a video
+
+find the secchi disk segment, grayscale the image
+
+resize the image to 90*50, then run the "h5" model on the image.
+
+The program will keep analyzing each frame until the result from h5 model returns 0
+
+meaning secchi disk is no longer detected in the frame.
+
+if secchi disk is no longer detected, depth_reco function will be ran
+
+depth_reco takes the frame as input, then run a mask from the right side of the frame to the left
+
+when the count of white pixels reaches 20% of the total pixel count in the mask
+
+The mask is returned in a variable.
+
+Then pytesseract OCR will run on the mask, if number can be read, return number
+
+if number cannot be read, save the mask.
+
 
 ```python
 import sys
