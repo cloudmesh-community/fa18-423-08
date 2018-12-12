@@ -481,3 +481,28 @@ model.fit(train_X, train_y, epochs=5, batch_size=128, validation_data=(test_X,te
 
 model.save('secchi_classification.h5')
 ```
+
+
+## Potential limitations and Problems
+
+1. The position of items needs to be similar to DSCN0003.avi for other video.
+
+2. segment of secchi disk is designed to be at a fixed range of positions where x axis is between 290 - 690
+
+3. The model is trained only based on DSCN0003.avi file, the adaptive and accuracy still needs to be improved
+
+   by having more data.
+   
+4. Pytesseract OCR has trouble reading numbers from the image provided
+
+## Possible solution for measurement reading
+
+1. Build an OCR model based on the data, but will require people to label each frame measurement for training purpose
+
+   The tape measurement should be replaced with other tapes, since this tape does not tell feet information on frames.
+
+2. Replace tape measurement with other types of measurement, for example, light sensor or pressure measurement. 
+
+
+
+
