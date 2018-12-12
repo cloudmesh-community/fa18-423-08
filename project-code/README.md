@@ -8,6 +8,7 @@ First install the code with
 git clone https://github.com/cloudmesh-community/fa18-423-08.git
 cd fa18-423-08/project-code
 ```
+### Install Anaconda
 
 ### Install CV2
 
@@ -26,6 +27,8 @@ pip install progressbar
 pip install tensorflow
 ```
 
+or
+
 ```conda
 conda install -c conda-forge tensorflow
 ```
@@ -34,6 +37,8 @@ conda install -c conda-forge tensorflow
 ```bash
 pip install keras
 ```
+
+or
 
 ```conda
 conda install -c conda-forge keras
@@ -70,13 +75,14 @@ Thei file is called. [DSCN0003.avi](https://drive.google.com/drive/folders/1Kwld
 
 To run the program please do the following
 
-download secchi_full_process1212.py, secchi_classfication.h5, and the video file under the same directory.
+Make sure secchi_full_process1212.py, secchi_classfication.h5, and the video file under the same directory.
 
 Run the program at the command line with
 
 ```bash
 python secchi_full_process1212.py DSCN0003.avi
 ```
+
 where the file takes one argument for the video name
 
 
@@ -169,16 +175,14 @@ if __name__== "__main__":
 
 
 
-## Pre-training data cleaning
+## Training model steps
+
+1. Seperate video into frames
+
+2. Extract secchi segment from the frames
 
 
-```python
-import os  
-import sys
-import cv2
-import threading
-from progressbar import ProgressBar, Percentage, Bar
-```
+### 1. Seperate video into frames
 
 Define a function to seperate the video into frames. There will be a main directory called "capture".
 
@@ -197,6 +201,12 @@ python secchi_videoprocessing.py video 2
 where the file takes two arguments, first one is the path of the videos, second one takes the number of cores to utilize
 
 ```python
+import os  
+import sys
+import cv2
+import threading
+from progressbar import ProgressBar, Percentage, Bar
+
 def MainRange(start, stop):
     for i in range(start, stop):
         try:
@@ -267,6 +277,12 @@ An example frame would look like this:
 
 Second step is to extract the secchi disk from the frames.
 
+The secchi disk is taken out of the frame by the pixel position of 290 < x < 690
+
+The secchi disk segment image is then put into grayscale
+
+Last, the secchi disk segment image is resized to  90*50.
+
 The code is stored under:
 
 https://github.com/cloudmesh-community/fa18-423-08/blob/master/project-code/secchi_segment.py
@@ -289,7 +305,9 @@ def secchi_segment(frame):
     frame_number = frame.split('\\')[2].split('.')[0]
     if not os.path.exists(video_name):
         os.makedirs(video_name)
-    secchi = img[:,300:680,:]
+    secchi = img[:,290:690,:]
+    secchi = cv2.cvtColor(secchi, cv2.COLOR_BGR2GRAY)
+    secchi = cv2.resize(secchi,(90,50),interpolation = cv2.INTER_CUBIC)
     path = video_name + '/frame_secchi_{number}.jpg'.format(number = frame_number)
     cv2.imwrite(path,secchi)
 #main
