@@ -21,6 +21,36 @@ brew brew tap homebrew/science
 pip install progressbar
 ```
 
+### Install tensorflow
+```bash
+pip install tensorflow
+```
+
+```conda
+conda install -c conda-forge tensorflow
+```
+
+### Install Keras
+```bash
+pip install keras
+```
+
+```conda
+conda install -c conda-forge keras
+```
+
+### Install pytesseract
+
+```bash
+pip install pytesseract
+```
+and
+
+```bash
+brew install tesseract
+```
+
+
 ## Fetching the data
 
 The Secchi Disk Data is located at 
