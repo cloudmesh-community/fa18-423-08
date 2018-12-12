@@ -1,3 +1,6 @@
 opencv-python
 progressbar
-matplotlib
+keras
+pytesseract
+tensorflow
+homebrew
