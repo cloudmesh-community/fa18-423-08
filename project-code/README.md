@@ -91,6 +91,7 @@ where the file takes one argument for the video name
 import sys
 import cv2
 import pytesseract
+import numpy as np
 from keras.models import load_model
 
 def frame_catch(video_path, model):
@@ -115,15 +116,21 @@ def frame_catch(video_path, model):
             y_predict = (-softmax_output).argsort(axis=1)[:,0][0]
             if y_predict == 0:
                 flag = True
+                cv2.imwrite('image_catch.jpg', image)
                 break
         else:
             continue
-    cap.release()
 
     if flag == True:
+        for i in range(1, 10):
+            cap.set(cv2.CAP_PROP_POS_FRAMES, count-i)
+            capture, image = cap.read()
+            if capture == True:
+                cv2.imwrite('frame{count:04}.jpg'.format(count=count-i),image)
         return image, 'Succeed'
     else:
         return image, 'Failed'
+    cap.release()
 
 
 def depth_reco(image):
@@ -145,32 +152,33 @@ def depth_reco(image):
                     count = count + 1
         if count/(160*220) > 0.2:
             flag = True
-            axis = x
             break
 
     if flag == True:
-        mini_secchi = image_catch[y0:y1,axis:(axis+160),:]
-        measurement = pytesseract.image_to_string(mini_secchi)
-
-        return measurement, mini_secchi, 'Succeed'
+        cv2.imwrite('mea_pic.jpg', mini_img)
+        # only keep yellow
+        hsv = cv2.cvtColor(cv2.imread('mea_pic.jpg'), cv2.COLOR_BGR2HSV)
+        mask = cv2.inRange(hsv, np.array([26,43,150]), np.array([38,255,255]))
+        measurement = pytesseract.image_to_string(mask, config='--psm 7 -c tessedit_char_whitelist=0123456789')
+        cv2.imwrite('mea_pic_after.jpg', mask)
+        return measurement, 'Succeed'
     else:
-        return measurement, mini_secchi, 'Failed'
+        return "", 'Failed'
 
 if __name__== "__main__":
 
     video_path = sys.argv[1]
     model = load_model('secchi_classification.h5')
     image_catch, stat = frame_catch(video_path, model)
-    cv2.imwrite("image_catch.jpg",image_catch)
+
     if stat == 'Failed':
-        print("Something bad happened.")
+        print("secchi can be detected through out the video.")
     else:
-        measurement, mea_pic, stat2 = depth_reco(image_catch)
+        measurement, stat2 = depth_reco(image_catch)
         if stat2 == 'Failed':
             print("Recognition failed")
         else:
-            cv2.imwrite('mea_pic.jpg', mea_pic)
-            print(measurement)
+            print("Measurement: %s" % measurement)
 ```
 
 The frame_catch function first read each frame in a video
