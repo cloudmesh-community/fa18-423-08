@@ -203,6 +203,12 @@ Then pytesseract OCR will run on the mask, if number can be read, return number
 
 if number cannot be read, save the mask.
 
+The program will save 12 images, one image where the secchi disk can no longer be detected
+
+nine images saved are the nine frames before the frame that secchi cannot be detected
+
+One image saved as measurement capture, another one saved as masked measurement.
+
 
 ## Training model steps
 
